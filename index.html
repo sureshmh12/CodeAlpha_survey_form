@@ -33,13 +33,13 @@
 
 <div id="page3" class="survey-page" style="display:none;">
   <h2>Page 3: Questions</h2>
-  <label for="question1">Question 1:</label>
+  <label for="question1">How are you:</label>
   <input type="text" id="question1"><br>
 
-  <label for="question2">Question 2:</label>
+  <label for="question2">How was your overall experence:</label>
   <input type="text" id="question2"><br>
 
-  <label for="question3">Question 3:</label>
+  <label for="question3">any suggestions:</label>
   <input type="text" id="question3"><br>
 
   <button onclick="submitForm()">Submit</button>
@@ -86,7 +86,9 @@
     //   question3
     // };
 
-    var body = "email : " + email + "\n" + "name "+name + "\n" + "phone no " + ph;
+    var body = "email : " + email + "\n" + "name "+name + "\n" + "phone no " + ph 
+      + "state "+state + "\n" + "country " + country + "\n"+ "How are you:" + question1 + "\n"
+      + "How was your overall experence:" + question2+"\n"+"any suggestion:"+question3;
 
     const subject = "test subject";
 
