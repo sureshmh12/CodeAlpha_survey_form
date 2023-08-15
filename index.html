@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Multi-Page Survey Form</title>
+</head>
+<body>
+<div id="page1" class="survey-page">
+  <h2>Page 1: Email</h2>
+  <label for="email">Email:</label>
+  <input type="email" id="email" required>
+  <button onclick="saveAndNavigate(2)">Next</button>
+</div>
+
+<div id="page2" class="survey-page" style="display:none;">
+  <h2>Page 2: Name, State, Country</h2>
+  <label for="name">Name:</label>
+  <input type="text" id="name" required><br>
+
+  <label for="state">State:</label>
+  <input type="text" id="state"><br>
+
+  <label for="country">Country:</label>
+  <input type="text" id="country"><br>
+
+  <label for="ph">phone no:</label>
+  <input type="text" id="ph"><br>
+
+  <button onclick="saveAndNavigate(3)">Next</button>
+</div>
+
+<div id="page3" class="survey-page" style="display:none;">
+  <h2>Page 3: Questions</h2>
+  <label for="question1">Question 1:</label>
+  <input type="text" id="question1"><br>
+
+  <label for="question2">Question 2:</label>
+  <input type="text" id="question2"><br>
+
+  <label for="question3">Question 3:</label>
+  <input type="text" id="question3"><br>
+
+  <button onclick="submitForm()">Submit</button>
+</div>
+
+<script>
+  function saveAndNavigate(pageNumber) {
+    const currentPage = document.getElementById(`page${pageNumber - 1}`);
+    const nextPage = document.getElementById(`page${pageNumber}`);
+    
+    // Save input values to localStorage/sessionStorage
+    if (pageNumber === 2) {
+      localStorage.setItem('email', document.getElementById('email').value);
+    } else if (pageNumber === 3) {
+      localStorage.setItem('name', document.getElementById('name').value);
+      localStorage.setItem('state', document.getElementById('state').value);
+      localStorage.setItem('country', document.getElementById('country').value);
+      localStorage.setItem('ph', document.getElementById('ph').value);
+    }
+
+    currentPage.style.display = 'none';
+    nextPage.style.display = 'block';
+  }
+
+  function submitForm() {
+    const email = localStorage.getItem('email');
+    const name = localStorage.getItem('name');
+    const state = localStorage.getItem('state');
+    const country = localStorage.getItem('country');
+    const ph = localStorage.getItem('ph');
+    const question1 = document.getElementById('question1').value;
+    const question2 = document.getElementById('question2').value;
+    const question3 = document.getElementById('question3').value;
+
+    // Perform email submission (server-side scripting)
+    // Example using JavaScript fetch API (not for actual email sending)
+    // const body = {
+    //   email,
+    //   name,
+    //   state,
+    //   country,
+    //   question1,
+    //   question2,
+    //   question3
+    // };
+
+    var body = "email : " + email + "\n" + "name "+name + "\n" + "phone no " + ph;
+
+    const subject = "test subject";
+
+
+    var mailtoLink = "mailto:your-email@example.com" +
+                "?subject=" + encodeURIComponent(subject) +
+                "&body=" + encodeURIComponent(body);
+
+            window.open(mailtoLink);
+  }
+</script>
+</body>
+</html>
